@@ -1,0 +1,15 @@
+.splash-page {
+    background-color: #FFFF00;
+}
+
+.login-page {
+    background-color: #6600FF;
+}
+
+.login-icon img {
+    width: 200px; height: 200px;
+    display: block;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
