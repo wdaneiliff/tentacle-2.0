@@ -1,4 +1,4 @@
-<ion-view view-title="Tentacle" name="login-view" class="login-page">
+<ion-view view-title="Log In" name="login-view" class="login-page">
     <ion-content class="padding">
 
         <div>
@@ -16,7 +16,7 @@
             </label>
         </div>
 
-        <button class="button button-block button-calm" ng-click="login()">Login</button>
+        <button ng-show="data.password.length" class="button button-block button-calm" ng-click="login()">Login</button>
 
 
     </ion-content>

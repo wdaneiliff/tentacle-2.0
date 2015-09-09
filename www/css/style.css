@@ -1,9 +1,9 @@
 .splash-page {
-    background-color: #FFFF00;
+    background-color: #886AEA;
 }
 
 .login-page {
-    background-color: #6600FF;
+    background-color: #886AEA;
 }
 
 .login-icon img {
@@ -12,4 +12,11 @@
     margin-bottom: auto;
     margin-left: auto;
     margin-right: auto;
+}
+.splash-btn{
+  bottom:0;
+  position: relative;
+  top: auto;
+  left: 0;
+  right: 0;
 }
