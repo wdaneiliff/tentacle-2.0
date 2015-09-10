@@ -1,4 +1,6 @@
-angular.module('starter.controllers', ['ionic', 'starter.services'])
+var fb = new Firebase("https://vivid-inferno-9711.firebaseio.com/");
+
+angular.module('starter.controllers', ['ionic', 'starter.services', 'ngCordova', 'firebase'])
 
 //-----------splash------------------------------------------
 // $scope variable, which is connected to the form fields we created in the login
@@ -6,15 +8,6 @@ angular.module('starter.controllers', ['ionic', 'starter.services'])
     $scope.data = {};
 
     $scope.enter = function() {
-        // LoginService.loginUser($scope.data.username, $scope.data.password).success(function(data) {
-        //     $state.go('tab.dash');
-        // }).error(function(data) {
-        //     var alertPopup = $ionicPopup.alert({
-        //         title: 'Login failed!',
-        //         template: 'Please check your credentials!'
-        //     });
-        // });
-
         $state.go('login');
     }
 })
@@ -22,19 +15,46 @@ angular.module('starter.controllers', ['ionic', 'starter.services'])
 
 //-----------login------------------------------------------
 // $scope variable, which is connected to the form fields we created in the login
-.controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state) {
+.controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state, $firebaseAuth) {
     $scope.data = {};
+    var fbAuth = $firebaseAuth(fb);
 
-    $scope.login = function() {
-        LoginService.loginUser($scope.data.username, $scope.data.password).success(function(data) {
-            $state.go('tab.dash');
-        }).error(function(data) {
+    $scope.login = function(username, password) {
+
+        fbAuth.$authWithPassword({
+            email: username,
+            password: password
+        }).then(function(authData) {
+            $state.go("tab.dash"); // go to secure.html if auth is true
+        }).catch(function(data) {
+            var alertPopup = $ionicPopup.alert({
+                title: 'Login failed!',
+                template: 'Please check your credentials!'
+            });
+        });
+
+    }
+
+
+    $scope.register = function(username, password) {
+
+        fbAuth.$createUser({email: username, password: password}).then(function(userData) {
+            // return login info:
+            return fbAuth.$authWithPassword({
+                email: username,
+                password: password
+            });
+        }).then(function(authData) {
+            $state.go("tab.dash");
+        }).catch(function(data) {
+          console.log(data);
             var alertPopup = $ionicPopup.alert({
                 title: 'Login failed!',
                 template: 'Please check your credentials!'
             });
         });
     }
+
 })
 //-----------login------------------------------------------
 
