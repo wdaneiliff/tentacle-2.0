@@ -58,21 +58,6 @@ angular.module('starter.services', [])
     name: 'Tonys Tea Party',
     lastText: 'Lets get wierd',
     face: 'img/octoman.png'
-  }, {
-    id: 2,
-    name: 'Graduation event',
-    lastText: 'Graduation event fun',
-    face: 'img/octoman.png'
-  }, {
-    id: 3,
-    name: 'Night out on the town',
-    lastText: 'Lets explore the town bitches',
-    face: 'img/octoman.png'
-  }, {
-    id: 4,
-    name: 'House Party',
-    lastText: 'Come to my house',
-    face: 'img/octoman.png'
   }];
 
   return {
