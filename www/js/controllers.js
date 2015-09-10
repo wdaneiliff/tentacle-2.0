@@ -93,8 +93,49 @@ angular.module('starter.controllers', ['ionic', 'starter.services', 'ngCordova',
   };
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
+.controller('ChatDetailCtrl', function($scope, $stateParams, Chats, $ionicHistory, $firebaseArray, $cordovaCamera, $cordovaCapture) {
   $scope.chat = Chats.get($stateParams.chatId);
+
+  $ionicHistory.clearHistory(); // cannot go backwards
+
+  $scope.images = []; // empty array if NO images saved in firebase
+
+  var fbAuth = fb.getAuth();
+  if(fbAuth) {
+      //                      nav into specific user node
+      var userReference = fb.child("users/" + fbAuth.uid);
+      // binding a specific node in firebase to array obj in image array
+      var syncArray = $firebaseArray(userReference.child("images"));
+      $scope.images = syncArray;
+  } else {
+      $state.go("login"); // goto firebase.html if fbAuth = false
+  }
+
+  // upoad the picture:-------------------------------------------------------
+  $scope.upload = function() {
+      // camera options (more available):
+      var options = {
+          quality : 75,
+          destinationType : Camera.DestinationType.DATA_URL, // 64bit data in fb
+          sourceType : Camera.PictureSourceType.CAMERA,
+          allowEdit : true,
+          encodingType: Camera.EncodingType.JPEG,
+          popoverOptions: CameraPopoverOptions,
+          targetWidth: 300,
+          targetHeight: 300,
+          saveToPhotoAlbum: true
+      };
+      $cordovaCamera.getPicture(options).then(function(imageData) {
+          // add pic to firebase:
+          syncArray.$add({image: imageData}).then(function() {
+              alert("Image has been uploaded");
+          });
+      }, function(error) {
+          console.error(error);
+      });
+  }
+
+
 })
 
 .controller('AccountCtrl', function($scope) {
