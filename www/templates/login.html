@@ -1,4 +1,4 @@
-<ion-view view-title="Log In" name="login-view" class="login-page">
+<!-- <ion-view view-title="Log In" name="login-view" class="login-page">
     <ion-content class="padding">
 
 
@@ -15,5 +15,26 @@
         <button ng-animate="scale-fade-in" ng-show="data.password.length" class="button button-block button-calm" ng-click="login()">Login</button>
 
 
+    </ion-content>
+</ion-view> -->
+
+<ion-view title="Firebase Login">
+    <ion-content>
+        <div>
+            <div class="list list-inset">
+                <label class="item item-input">
+                    <input ng-model="data.username" type="text" placeholder="Username" />
+                </label>
+                <label class="item item-input">
+                    <input ng-model="data.password" type="password" placeholder="Password" />
+                </label>
+            </div>
+            <div class="padding-left padding-right">
+                <div class="button-bar">
+                    <a class="button" ng-click="login(username, password)">Login</a>
+                    <a class="button" ng-click="register(username, password)">Register</a>
+                </div>
+            </div>
+        </div>
     </ion-content>
 </ion-view>
