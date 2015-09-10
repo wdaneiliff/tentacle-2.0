@@ -67,7 +67,7 @@ tentacleApp.config(function($stateProvider, $urlRouterProvider) {
     views: {
       'tab-create': {
         templateUrl: 'templates/tab-create.html',
-        controller: 'CreateCtrl'
+        controller: 'EventsCtrl'
       }
     }
   })

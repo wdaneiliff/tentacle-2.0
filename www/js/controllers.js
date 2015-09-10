@@ -1,5 +1,5 @@
 var fb = new Firebase("https://vivid-inferno-9711.firebaseio.com/");
-
+console.log('fb: ', fb);
 var tentacleApp = angular.module('starter.controllers', ['ionic', 'starter.services', 'ngCordova', 'firebase'])
 
 //-----------splash------------------------------------------
@@ -18,14 +18,13 @@ tentacleApp.controller('SplashCtrl', function($scope, LoginService, $ionicPopup,
 tentacleApp.controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state, $firebaseAuth) {
     $scope.data = {};
     var fbAuth = $firebaseAuth(fb);
-
     $scope.login = function(username, password) {
 
         fbAuth.$authWithPassword({
             email: username,
             password: password
         }).then(function(authData) {
-            $state.go("tab.create"); 
+            $state.go("tab.events");
         }).catch(function(data) {
             var alertPopup = $ionicPopup.alert({
                 title: 'Login failed!',
@@ -45,7 +44,7 @@ tentacleApp.controller('LoginCtrl', function($scope, LoginService, $ionicPopup, 
                 password: password
             });
         }).then(function(authData) {
-            $state.go("tab.dash");
+            $state.go("tab.events");
         }).catch(function(data) {
           console.log(data);
             var alertPopup = $ionicPopup.alert({
@@ -77,35 +76,66 @@ tentacleApp.controller('CameraCtrl', function($scope, Camera) {
 
 
 tentacleApp.controller('CreateCtrl', function($scope) {
-
-
 })
 
-tentacleApp.controller('EventsCtrl', function($scope, Events) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-//   $scope.event = {
-//     title: '',
-//     desc: '',
-//     pics: []
-//
-//   }
-//   $scope.createEvent = function(){
-//     $scope.event.title = $scope.title;
-//
-//     Call to firebase
-//   }
-//
+tentacleApp.controller('EventsCtrl', function($scope, Events,$firebaseArray, $firebaseAuth  ) {
+
+var fbAuth = $firebaseAuth(fb);
+
+  $scope.event = {
+    title: '',
+    description: '',
+    date: '',
+    time: '',
+    pics: [],
+    users: [],
+    admin: {}
+  };
+
+  $scope.createEvent = function(title, description, date, time){
+          var ref = new Firebase("https://vivid-inferno-9711.firebaseio.com/events");
+
+          $scope.event.title = title;
+          $scope.event.description = description;
+          $scope.event.date = date;
+          $scope.event.time = time;
+
+          $scope.eventsRef = $firebaseArray(ref);
+
+          if(fbAuth) {
+              $scope.eventsRef.$add($scope.event).then(function() {
+                  alert("Event has been uploaded");
+                  console.log($scope.event);
+              }).catch(function(error){
+                console.log('error while $add()', error);
+              });
+
+              $scope.event = {
+                title: '',
+                description: '',
+                date: '',
+                time: '',
+                pics: [],
+                users: [],
+                admin: {}
+              };
+          } else {
+              $state.go("login"); // goto firebase.html if fbAuth = false
+          }
+
+
+
+
+
+  }
+
+
   $scope.events = Events.all();
   $scope.remove = function(event) {
     Events.remove(event);
   };
 });
+
 
 tentacleApp.controller('EventDetailCtrl', function($scope, $stateParams, Events, $ionicHistory, $firebaseArray, $cordovaCamera, $cordovaCapture) {
   $scope.event = Events.get($stateParams.eventId);
