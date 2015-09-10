@@ -9,7 +9,7 @@ tentacleApp.controller('SplashCtrl', function($scope, LoginService, $ionicPopup,
 
     $scope.enter = function() {
         $state.go('login');
-    }
+    };
 });
 //-----------splash------------------------------------------
 
