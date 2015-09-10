@@ -25,7 +25,7 @@ angular.module('starter.controllers', ['ionic', 'starter.services', 'ngCordova',
             email: username,
             password: password
         }).then(function(authData) {
-            $state.go("secure"); // go to secure.html if auth is true
+            $state.go("tab.dash"); // go to secure.html if auth is true
         }).catch(function(data) {
             var alertPopup = $ionicPopup.alert({
                 title: 'Login failed!',
@@ -34,6 +34,27 @@ angular.module('starter.controllers', ['ionic', 'starter.services', 'ngCordova',
         });
 
     }
+
+
+    $scope.register = function(username, password) {
+
+        fbAuth.$createUser({email: username, password: password}).then(function(userData) {
+            // return login info:
+            return fbAuth.$authWithPassword({
+                email: username,
+                password: password
+            });
+        }).then(function(authData) {
+            $state.go("tab.dash");
+        }).catch(function(data) {
+          console.log(data);
+            var alertPopup = $ionicPopup.alert({
+                title: 'Login failed!',
+                template: 'Please check your credentials!'
+            });
+        });
+    }
+
 })
 //-----------login------------------------------------------
 
