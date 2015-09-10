@@ -78,7 +78,7 @@ tentacleApp.controller('CameraCtrl', function($scope, Camera) {
 
 tentacleApp.controller('DashCtrl', function($scope) {})
 
-tentacleApp.controller('ChatsCtrl', function($scope, Chats) {
+tentacleApp.controller('EventsCtrl', function($scope, Events) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -87,14 +87,14 @@ tentacleApp.controller('ChatsCtrl', function($scope, Chats) {
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
+  $scope.events = Events.all();
+  $scope.remove = function(event) {
+    Events.remove(event);
   };
 });
 
-tentacleApp.controller('ChatDetailCtrl', function($scope, $stateParams, Chats, $ionicHistory, $firebaseArray, $cordovaCamera, $cordovaCapture) {
-  $scope.chat = Chats.get($stateParams.chatId);
+tentacleApp.controller('EventDetailCtrl', function($scope, $stateParams, Events, $ionicHistory, $firebaseArray, $cordovaCamera, $cordovaCapture) {
+  $scope.event = Events.get($stateParams.eventId);
 
   // $ionicHistory.clearHistory(); // cannot go backwards
 
