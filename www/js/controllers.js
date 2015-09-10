@@ -1,21 +1,21 @@
 var fb = new Firebase("https://vivid-inferno-9711.firebaseio.com/");
 
-angular.module('starter.controllers', ['ionic', 'starter.services', 'ngCordova', 'firebase'])
+var tentacleApp = angular.module('starter.controllers', ['ionic', 'starter.services', 'ngCordova', 'firebase'])
 
 //-----------splash------------------------------------------
 // $scope variable, which is connected to the form fields we created in the login
-.controller('SplashCtrl', function($scope, LoginService, $ionicPopup, $state) {
+tentacleApp.controller('SplashCtrl', function($scope, LoginService, $ionicPopup, $state) {
     $scope.data = {};
 
     $scope.enter = function() {
         $state.go('login');
     }
-})
+});
 //-----------splash------------------------------------------
 
 //-----------login------------------------------------------
 // $scope variable, which is connected to the form fields we created in the login
-.controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state, $firebaseAuth) {
+tentacleApp.controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state, $firebaseAuth) {
     $scope.data = {};
     var fbAuth = $firebaseAuth(fb);
 
@@ -55,10 +55,10 @@ angular.module('starter.controllers', ['ionic', 'starter.services', 'ngCordova',
         });
     }
 
-})
+});
 //-----------login------------------------------------------
 
-.controller('CameraCtrl', function($scope, Camera) {
+tentacleApp.controller('CameraCtrl', function($scope, Camera) {
 
   $scope.getPhoto = function() {
     Camera.getPicture().then(function(imageURI) {
@@ -73,12 +73,12 @@ angular.module('starter.controllers', ['ionic', 'starter.services', 'ngCordova',
       saveToPhotoAlbum: false
     });
   };
-})
+});
 
 
-.controller('DashCtrl', function($scope) {})
+tentacleApp.controller('DashCtrl', function($scope) {})
 
-.controller('ChatsCtrl', function($scope, Chats) {
+tentacleApp.controller('ChatsCtrl', function($scope, Chats) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -91,12 +91,12 @@ angular.module('starter.controllers', ['ionic', 'starter.services', 'ngCordova',
   $scope.remove = function(chat) {
     Chats.remove(chat);
   };
-})
+});
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats, $ionicHistory, $firebaseArray, $cordovaCamera, $cordovaCapture) {
+tentacleApp.controller('ChatDetailCtrl', function($scope, $stateParams, Chats, $ionicHistory, $firebaseArray, $cordovaCamera, $cordovaCapture) {
   $scope.chat = Chats.get($stateParams.chatId);
 
-  $ionicHistory.clearHistory(); // cannot go backwards
+  // $ionicHistory.clearHistory(); // cannot go backwards
 
   $scope.images = []; // empty array if NO images saved in firebase
 
@@ -123,12 +123,13 @@ angular.module('starter.controllers', ['ionic', 'starter.services', 'ngCordova',
           popoverOptions: CameraPopoverOptions,
           targetWidth: 300,
           targetHeight: 300,
-          saveToPhotoAlbum: true
+          saveToPhotoAlbum: false
       };
       $cordovaCamera.getPicture(options).then(function(imageData) {
           // add pic to firebase:
           syncArray.$add({image: imageData}).then(function() {
               alert("Image has been uploaded");
+              console.log(imageData);
           });
       }, function(error) {
           console.error(error);
@@ -136,9 +137,9 @@ angular.module('starter.controllers', ['ionic', 'starter.services', 'ngCordova',
   }
 
 
-})
+});
 
-.controller('AccountCtrl', function($scope) {
+tentacleApp.controller('AccountCtrl', function($scope) {
   $scope.settings = {
     enableFriends: true
   };

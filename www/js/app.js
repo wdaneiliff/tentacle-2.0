@@ -1,12 +1,10 @@
 var fb = new Firebase("https://vivid-inferno-9711.firebaseio.com/");
 
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+var tentacleApp = angular.module('starter', ['ionic', 'starter.controllers', 'starter.services']);
 
-.config(function($compileProvider){
-    $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
-})
 
-.run(function($ionicPlatform) {
+
+tentacleApp.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -20,9 +18,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       StatusBar.styleLightContent();
     }
   });
-})
+});
 
-.config(function($stateProvider, $urlRouterProvider) {
+tentacleApp.config(function($stateProvider, $urlRouterProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
