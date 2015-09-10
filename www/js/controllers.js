@@ -78,7 +78,7 @@ tentacleApp.controller('CameraCtrl', function($scope, Camera) {
 tentacleApp.controller('CreateCtrl', function($scope) {
 })
 
-tentacleApp.controller('EventsCtrl', function($scope, Events,$firebaseArray, $firebaseAuth  ) {
+tentacleApp.controller('EventsCtrl', function($scope, Events,$firebaseArray, $firebaseAuth){
 
 var fbAuth = $firebaseAuth(fb);
 
@@ -121,20 +121,10 @@ var fbAuth = $firebaseAuth(fb);
               };
           } else {
               $state.go("login"); // goto firebase.html if fbAuth = false
-          }
-
-
-
-
-
+            }
   }
-
-
-  $scope.events = Events.all();
-  $scope.remove = function(event) {
-    Events.remove(event);
-  };
 });
+
 
 
 tentacleApp.controller('EventDetailCtrl', function($scope, $stateParams, Events, $ionicHistory, $firebaseArray, $cordovaCamera, $cordovaCapture) {
@@ -186,8 +176,14 @@ tentacleApp.controller('EventDetailCtrl', function($scope, $stateParams, Events,
 
 });
 
-tentacleApp.controller('AccountCtrl', function($scope) {
+tentacleApp.controller('AccountCtrl', function($scope, $stateParams, $state) {
   $scope.settings = {
     enableFriends: true
   };
+
+  $scope.logout = function(){
+    console.log("log out please")
+    $state.go("splash")
+  }
+
 });
