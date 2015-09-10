@@ -44,11 +44,11 @@ angular.module('starter.services', [])
     }
 }]) //-----------Camera------------------------------------------
 
-.factory('Chats', function() {
+.factory('Events', function() {
   // Might use a resource here that returns a JSON array
 
   // Some fake testing data
-  var chats = [{
+  var events = [{
     id: 0,
     name: 'Jimmys Birthday Party!',
     lastText: 'Come celebrate jimmys 21st birthday',
@@ -58,34 +58,19 @@ angular.module('starter.services', [])
     name: 'Tonys Tea Party',
     lastText: 'Lets get wierd',
     face: 'img/octoman.png'
-  }, {
-    id: 2,
-    name: 'Graduation event',
-    lastText: 'Graduation event fun',
-    face: 'img/octoman.png'
-  }, {
-    id: 3,
-    name: 'Night out on the town',
-    lastText: 'Lets explore the town bitches',
-    face: 'img/octoman.png'
-  }, {
-    id: 4,
-    name: 'House Party',
-    lastText: 'Come to my house',
-    face: 'img/octoman.png'
   }];
 
   return {
     all: function() {
-      return chats;
+      return events;
     },
-    remove: function(chat) {
-      chats.splice(chats.indexOf(chat), 1);
+    remove: function(event) {
+      events.splice(events.indexOf(event), 1);
     },
-    get: function(chatId) {
-      for (var i = 0; i < chats.length; i++) {
-        if (chats[i].id === parseInt(chatId)) {
-          return chats[i];
+    get: function(eventId) {
+      for (var i = 0; i < events.length; i++) {
+        if (events[i].id === parseInt(eventId)) {
+          return events[i];
         }
       }
       return null;
