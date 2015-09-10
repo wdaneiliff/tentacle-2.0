@@ -25,7 +25,7 @@ tentacleApp.controller('LoginCtrl', function($scope, LoginService, $ionicPopup, 
             email: username,
             password: password
         }).then(function(authData) {
-            $state.go("tab.dash"); // go to secure.html if auth is true
+            $state.go("tab.create"); 
         }).catch(function(data) {
             var alertPopup = $ionicPopup.alert({
                 title: 'Login failed!',
@@ -76,7 +76,10 @@ tentacleApp.controller('CameraCtrl', function($scope, Camera) {
 });
 
 
-tentacleApp.controller('DashCtrl', function($scope) {})
+tentacleApp.controller('CreateCtrl', function($scope) {
+
+
+})
 
 tentacleApp.controller('EventsCtrl', function($scope, Events) {
   // With the new view caching in Ionic, Controllers are only called
@@ -86,7 +89,18 @@ tentacleApp.controller('EventsCtrl', function($scope, Events) {
   //
   //$scope.$on('$ionicView.enter', function(e) {
   //});
-
+//   $scope.event = {
+//     title: '',
+//     desc: '',
+//     pics: []
+//
+//   }
+//   $scope.createEvent = function(){
+//     $scope.event.title = $scope.title;
+//
+//     Call to firebase
+//   }
+//
   $scope.events = Events.all();
   $scope.remove = function(event) {
     Events.remove(event);
@@ -96,6 +110,8 @@ tentacleApp.controller('EventsCtrl', function($scope, Events) {
 tentacleApp.controller('EventDetailCtrl', function($scope, $stateParams, Events, $ionicHistory, $firebaseArray, $cordovaCamera, $cordovaCapture) {
   $scope.event = Events.get($stateParams.eventId);
 
+
+
   // $ionicHistory.clearHistory(); // cannot go backwards
 
   $scope.images = []; // empty array if NO images saved in firebase
@@ -104,6 +120,7 @@ tentacleApp.controller('EventDetailCtrl', function($scope, $stateParams, Events,
   if(fbAuth) {
       //                      nav into specific user node
       var userReference = fb.child("users/" + fbAuth.uid);
+      // var userReference = fb.child("events/" + fbAuth.uid);
       // binding a specific node in firebase to array obj in image array
       var syncArray = $firebaseArray(userReference.child("images"));
       $scope.images = syncArray;

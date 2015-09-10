@@ -1,0 +1,29 @@
+<ion-view view-title="Create Event">
+  <ion-content class="padding">
+    <div>
+        <div class="list list-inset">
+            <label class="item item-input">
+                <input ng-model="event.title" type="text" placeholder="Title" />
+            </label>
+            <label class="item item-input">
+                <input ng-model="event.description" type="text" placeholder="Description" />
+            </label>
+            <label class="item item-input">
+                <input ng-model="event.date" type="date" placeholder="Date" />
+            </label>
+            <label class="item item-input">
+                <input ng-model="event.time" type="time" placeholder="Time" />
+            </label>
+            <label class="item item-input">
+                <input ng-model="event.location" type="text" placeholder="Location" />
+            </label>
+        </div>
+        <div class="padding-left padding-right">
+            <div class="button-bar">
+                <a class="button" ng-click="createEvent()">Submit</a>
+            </div>
+        </div>
+    </div>
+
+  </ion-content>
+</ion-view>
