@@ -1,3 +1,11 @@
+@font-face{
+  font-family: wazeFont;
+  src:url(../fonts/proxima-nova-soft-bold.ttf);
+}
+.splash-page{
+  font-family: wazeFont;
+}
+
 .splash-page {
     background-color: #886AEA;
 }
@@ -83,9 +91,6 @@
   margin-top: 10px;
 }
 
-.tab-create, .tab-account {
-    background-color: #886AEA;
-}
-.tab-events {
+.tab-create, .tab-account, .tab-events, .login {
     background-color: #886AEA;
 }
