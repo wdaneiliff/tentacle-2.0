@@ -42,3 +42,22 @@
     background-repeat: no-repeat;
     background-position: center, center;
 }
+
+.logo-background{
+  background-image:url(img/octoman.png);
+}
+.logo-event-page{
+  padding-left: 10px;
+  padding-top: 10px;
+  border-width: 3px;
+  border: black;
+}
+.event-page-top{
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+.event-page-info{
+  padding-left: 10px;
+  padding-top: 10px;
+}
