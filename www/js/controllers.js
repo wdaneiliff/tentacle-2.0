@@ -1,6 +1,6 @@
 var fb = new Firebase("https://vivid-inferno-9711.firebaseio.com/");
 console.log('fb: ', fb);
-var tentacleApp = angular.module('starter.controllers', ['ionic', 'starter.services', 'ngCordova', 'firebase'])
+var tentacleApp = angular.module('starter.controllers', ['ionic', 'starter.services', 'ngCordova', 'firebase']);
 
 //-----------splash------------------------------------------
 // $scope variable, which is connected to the form fields we created in the login
@@ -15,7 +15,7 @@ tentacleApp.controller('SplashCtrl', function($scope, LoginService, $ionicPopup,
 
 //-----------login------------------------------------------
 // $scope variable, which is connected to the form fields we created in the login
-tentacleApp.controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state, $firebaseAuth) {
+tentacleApp.controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state, $firebaseAuth){
     $scope.data = {};
     var fbAuth = $firebaseAuth(fb);
     $scope.login = function(username, password) {
@@ -57,7 +57,7 @@ tentacleApp.controller('LoginCtrl', function($scope, LoginService, $ionicPopup, 
 });
 //-----------login------------------------------------------
 
-tentacleApp.controller('CameraCtrl', function($scope, Camera) {
+tentacleApp.controller('CameraCtrl', function($scope, Camera){
 
   $scope.getPhoto = function() {
     Camera.getPicture().then(function(imageURI) {
@@ -75,37 +75,34 @@ tentacleApp.controller('CameraCtrl', function($scope, Camera) {
 });
 
 
-tentacleApp.controller('CreateCtrl', function($scope) {
+tentacleApp.controller('CreateCtrl', function($scope){
 });
 
 
 tentacleApp.controller('EventsCtrl', function($scope, Events, $firebaseArray, $firebaseAuth){
 
 
-var fbAuth = $firebaseAuth(fb);
+  var fbAuth = $firebaseAuth(fb);
 
-  $scope.event = {
-    title: '',
-    description: '',
-    date: '',
-    time: '',
-    pics: [],
-    users: [],
-    admin: {}
-  };
+    $scope.event = {
+      title: '',
+      description: '',
+      date: '',
+      time: '',
+      pics: [],
+      users: [],
+      admin: {}
+    };
 
   $scope.createEvent = function(title, description, date, time){
           var ref = new Firebase("https://vivid-inferno-9711.firebaseio.com/events");
 
           $scope.eventsRef = $firebaseArray(ref);
 
-
           $scope.event.title = title;
           $scope.event.description = description;
           $scope.event.date = date;
           $scope.event.time = time;
-
-
 
           if(fbAuth) {
               $scope.eventsRef.$add($scope.event).then(function() {
@@ -126,23 +123,20 @@ var fbAuth = $firebaseAuth(fb);
               };
           } else {
               $state.go("login");
-          }
-      }
+          };
+        };
 
-  $scope.events = (function(){
-    var ref = new Firebase("https://vivid-inferno-9711.firebaseio.com/events");
-    var events = $firebaseArray(ref);
-    return events;
-  })();
 
-  // $scope.eventshow = function(event){
-  //   $state.go("tab.event-detail")
-  // }
+    $scope.events = (function(){
+      var ref = new Firebase("https://vivid-inferno-9711.firebaseio.com/events");
+      var events = $firebaseArray(ref);
+      return events;
+    })();
 
 });
 
-<<<<<<< HEAD
-tentacleApp.controller('EventDetailCtrl', function($scope, $stateParams, Events, $ionicHistory, $firebaseArray, $cordovaCamera, $cordovaCapture, $ionicModal, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
+
+tentacleApp.controller('EventDetailCtrl', function($scope, $stateParams, Events, $ionicHistory, $firebaseArray, $cordovaCamera, $cordovaCapture, $ionicModal, $ionicSlideBoxDelegate, $ionicScrollDelegate){
     $scope.event = Events.get($stateParams.eventId);
 
     // $ionicHistory.clearHistory(); // cannot go backwards
@@ -161,9 +155,9 @@ tentacleApp.controller('EventDetailCtrl', function($scope, $stateParams, Events,
     } else {
         $state.go("login"); // goto firebase.html if fbAuth = false
     }
-=======
+});
 
-tentacleApp.controller('EventDetailCtrl', function($scope, $stateParams, Events, $ionicHistory, $firebaseArray, $cordovaCamera, $cordovaCapture) {
+tentacleApp.controller('EventDetailCtrl', function($scope, $stateParams, Events, $ionicHistory, $firebaseArray, $cordovaCamera, $cordovaCapture, $ionicModal, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
   $scope.event = Events.get($stateParams.eventId);
 
   console.log($scope.event);
@@ -181,7 +175,7 @@ tentacleApp.controller('EventDetailCtrl', function($scope, $stateParams, Events,
   } else {
       $state.go("login"); // goto firebase.html if fbAuth = false
   }
->>>>>>> master
+
 
   // upoad the picture:-------------------------------------------------------
   $scope.upload = function() {
@@ -206,7 +200,7 @@ tentacleApp.controller('EventDetailCtrl', function($scope, $stateParams, Events,
       }, function(error) {
           console.error(error);
       });
-  }
+  };
 
   //-------------------------MODAL Zoom----------------------------------
     $scope.zoomMin = 1;
@@ -214,8 +208,6 @@ tentacleApp.controller('EventDetailCtrl', function($scope, $stateParams, Events,
     $scope.showImages = function(image, index) {
         $scope.image = image;
         $scope.activeSlide = index;
-        // console.log("$scope.activeSlide = ");
-        // console.log($scope.activeSlide);
         $scope.showModal('templates/gallery-zoom.html');
     };
 
@@ -226,11 +218,11 @@ tentacleApp.controller('EventDetailCtrl', function($scope, $stateParams, Events,
             $scope.modal = modal;
             $scope.modal.show();
         });
-    }
+    };
 
     $scope.closeModal = function() {
         $scope.modal.hide();
-        $scope.modal.remove()
+        $scope.modal.remove();
     };
 
     $scope.updateSlideStatus = function(slide) {
@@ -243,7 +235,7 @@ tentacleApp.controller('EventDetailCtrl', function($scope, $stateParams, Events,
         }
     };
     //-------------------------MODAL Zoom---------------------------------------
-});
+}); //end of eventDetail controller
 
 tentacleApp.controller('AccountCtrl', function($scope, $stateParams, $state) {
   $scope.settings = {
@@ -251,8 +243,8 @@ tentacleApp.controller('AccountCtrl', function($scope, $stateParams, $state) {
   };
 
   $scope.logout = function(){
-    console.log("log out please")
-    $state.go("splash")
-  }
+    console.log("log out please");
+    $state.go("splash");
+  };
 
 });
