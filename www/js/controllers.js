@@ -79,7 +79,7 @@ tentacleApp.controller('CreateCtrl', function($scope){
 });
 
 
-tentacleApp.controller('EventsCtrl', function($scope, Events, $firebaseArray, $firebaseAuth){
+tentacleApp.controller('EventsCtrl', function($scope, $state, Events, $firebaseArray, $firebaseAuth, $ionicPopup){
 
 
   var fbAuth = $firebaseAuth(fb);
@@ -104,11 +104,15 @@ tentacleApp.controller('EventsCtrl', function($scope, Events, $firebaseArray, $f
           $scope.event.date = date;
           $scope.event.time = time;
 
-          if(fbAuth) {
+          //if(fbAuth) {
+         if ((fbAuth) && ($scope.event.title === "GA")) {
               $scope.eventsRef.$add($scope.event).then(function() {
-                  alert("Event has been uploaded");
+                  //alert("Event has been uploaded");
+                  var alertPopup = $ionicPopup.alert({
+                      title: 'Event has been uploaded',
+                  });
                   console.log($scope.event);
-              }).catch(function(error){
+              }).catch(function(event) {
                 console.log('error while $add()', error);
               });
 
@@ -122,7 +126,11 @@ tentacleApp.controller('EventsCtrl', function($scope, Events, $firebaseArray, $f
                 admin: {}
               };
           } else {
-              $state.go("login");
+              var alertPopup = $ionicPopup.alert({
+                  title: 'Must have Admin Priveleges',
+                  template: 'Access Denied'
+              });
+              //$state.go("login"); // use it? maybe, maybe Not...
           };
         };
 
