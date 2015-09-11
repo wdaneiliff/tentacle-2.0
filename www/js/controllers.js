@@ -76,13 +76,11 @@ tentacleApp.controller('CameraCtrl', function($scope, Camera) {
 
 
 tentacleApp.controller('CreateCtrl', function($scope) {
-})
+});
 
-<<<<<<< HEAD
-tentacleApp.controller('EventsCtrl', function($scope, Events, $firebaseArray, $firebaseAuth) {
-=======
-tentacleApp.controller('EventsCtrl', function($scope, Events,$firebaseArray, $firebaseAuth){
->>>>>>> master
+
+tentacleApp.controller('EventsCtrl', function($scope, Events, $firebaseArray, $firebaseAuth){
+
 
 var fbAuth = $firebaseAuth(fb);
 
@@ -127,10 +125,9 @@ var fbAuth = $firebaseAuth(fb);
                 admin: {}
               };
           } else {
-              $state.go("login"); // goto firebase.html if fbAuth = false
-<<<<<<< HEAD
+              $state.go("login");
           }
-  }
+      }
 
   $scope.events = (function(){
     var ref = new Firebase("https://vivid-inferno-9711.firebaseio.com/events");
@@ -139,16 +136,7 @@ var fbAuth = $firebaseAuth(fb);
   })();
 
 
-  // $scope.events = Events.all();
-  // $scope.remove = function(event) {
-  //   Events.remove(event);
-  // };
-=======
-            }
-  }
->>>>>>> master
 });
-
 
 
 tentacleApp.controller('EventDetailCtrl', function($scope, $stateParams, Events, $ionicHistory, $firebaseArray, $cordovaCamera, $cordovaCapture) {
