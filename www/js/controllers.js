@@ -171,7 +171,7 @@ tentacleApp.controller('EventDetailCtrl', function($scope, $stateParams, Events,
   console.log($scope.event);
 
   $scope.images = []; // empty array if NO images saved in firebase
-
+  $scope.imagetime = '';
   var fbAuth = fb.getAuth();
   if(fbAuth) {
       //                      nav into specific user node
@@ -201,7 +201,9 @@ tentacleApp.controller('EventDetailCtrl', function($scope, $stateParams, Events,
       };
       $cordovaCamera.getPicture(options).then(function(imageData) {
           // add pic to firebase:
+
           syncArray.$add({image: imageData}).then(function() {
+            alert(imagetime = new Date().getTime().toString());
               //alert(imageData);
               alert("Image has been uploaded");
           });
