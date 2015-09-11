@@ -82,3 +82,10 @@
 .description{
   margin-top: 10px;
 }
+
+.tab-create, .tab-account {
+    background-color: #886AEA;
+}
+.tab-events {
+    background-color: #886AEA;
+}
