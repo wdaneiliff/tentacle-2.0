@@ -4,12 +4,27 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 -->
-<ion-view view-title="{{id.title}}" ng-init="">
+<ion-view view-title="WDI 17 Graduation Night!" ng-init="">
   <ion-nav-buttons side="right">
         <button class="button button-icon icon ion-camera" ng-click="upload()"></button>
     </ion-nav-buttons>
+
     <ion-content>
-        <!-- grid based flow for pics -->
+        <!-- /Event Description and Info/ -->
+      <div class="container" style="width: 100%; overflow: hidden">
+          <!-- <div  class="logo-event-page"><img style = "border:2px solid black"src="img/octo.gif" height="50" width="50"/>
+          </div> -->
+
+          <div class="event-page-info">
+            <h1 style="font-size:20px">WDI 17 Graduation Night!</h1>
+            <p style="font-size:12px">
+            Let's get so hammered that we forget everything <br>
+            we've learned over the past twelve weeks!
+            </p>
+          </div>
+      </div>
+
+      <!-- grid based flow for pics -->
         <div class="row" ng-repeat="image in images" ng-if="$index % 4 === 0">
             <div class="col col-25" ng-if="$index < images.length">
                 <img ng-src="data:image/jpg;base64,{{images[$index].image}}" on-touch="showImages(images[$index].image, $index)" width="100%" />
