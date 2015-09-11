@@ -11,14 +11,16 @@
 
     <ion-content>
         <!-- grid based flow for pics -->
-      <div class="event-page-top">
-        <div class="logo-event-page"><img src="img/octo.gif" height="258" width="258"/></div>
-        <div class="event-page-info">
-          <h1>WDI 17 Graduation Night!</h1>
-          <p>
-          Let's get so hammered that we forget everything we learned over the past 12 weeks!
-        </p>
+      <div class="container">
+        <div  class="logo-event-page"><img style = "border:2px solid black"src="img/octo.gif" height="258" width="258"/>
+          <div class="event-page-info">
+            <ul><h1>WDI 17 Graduation Night!</h1><ul>
+            <p>
+            Let's get so hammered that we forget everything we learned over the past 12 weeks!
+          </p>
+          </div>
         </div>
+
       </div>
         <div class="row" ng-repeat="image in images" ng-if="$index % 4 === 0">
             <div class="col col-25" ng-if="$index < images.length">
