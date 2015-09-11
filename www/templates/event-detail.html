@@ -27,19 +27,17 @@
           <div class="info">
             <p>
              September 11th, 2015
-             <br>
-             All Day
             <br>
             1520 2nd St, Santa Monica, CA
             </p>
           </div>
-
+        </div>
       </div>
 
 
 
       <!-- grid based flow for pics -->
-        <div style="border:4px solid grey" class="row event-pics" ng-repeat="image in images" ng-if="$index % 4 === 0">
+        <div class="row event-pics" ng-repeat="image in images" ng-if="$index % 4 === 0">
             <div class="col col-25" ng-if="$index < images.length">
                 <img ng-src="data:image/jpg;base64,{{images[$index].image}}" on-touch="showImages(images[$index].image, $index)" width="100%" />
             </div>
