@@ -81,9 +81,9 @@
   padding-left: 15px;
 }
 .ga-pic img{
-  width: 100px;
-  height: 100px;
-  padding: 15px;
+  width: 80px;
+  height: 80px;
+  padding: 10px;
 }
 .ga-pic{
   display: inline-block;
@@ -92,6 +92,6 @@
   margin-top: 10px;
 }
 
-.tab-create, .tab-account, .tab-events, .login, .event-pics {
+.tab-create, .tab-account, .tab-events, .login{
     background-color: #886AEA;
 }
