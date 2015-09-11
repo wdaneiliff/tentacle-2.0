@@ -8,6 +8,7 @@
 
 .splash-page {
     background-color: #886AEA;
+    font-size: 20px;
 }
 
 .login-page {
@@ -91,6 +92,6 @@
   margin-top: 10px;
 }
 
-.tab-create, .tab-account, .tab-events, .login {
+.tab-create, .tab-account, .tab-events, .login, .event-pics {
     background-color: #886AEA;
 }
