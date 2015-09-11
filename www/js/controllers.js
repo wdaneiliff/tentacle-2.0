@@ -93,23 +93,25 @@ tentacleApp.controller('EventsCtrl', function($scope, Events) {
   };
 });
 
-tentacleApp.controller('EventDetailCtrl', function($scope, $stateParams, Events, $ionicHistory, $firebaseArray, $cordovaCamera, $cordovaCapture) {
-  $scope.event = Events.get($stateParams.eventId);
+tentacleApp.controller('EventDetailCtrl', function($scope, $stateParams, Events, $ionicHistory, $firebaseArray, $cordovaCamera, $cordovaCapture, $ionicModal, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
+    $scope.event = Events.get($stateParams.eventId);
 
-  // $ionicHistory.clearHistory(); // cannot go backwards
+    // $ionicHistory.clearHistory(); // cannot go backwards
 
-  $scope.images = []; // empty array if NO images saved in firebase
+    $scope.images = []; // empty array if NO images saved in firebase
 
-  var fbAuth = fb.getAuth();
-  if(fbAuth) {
-      //                      nav into specific user node
-      var userReference = fb.child("users/" + fbAuth.uid);
-      // binding a specific node in firebase to array obj in image array
-      var syncArray = $firebaseArray(userReference.child("images"));
-      $scope.images = syncArray;
-  } else {
-      $state.go("login"); // goto firebase.html if fbAuth = false
-  }
+    var imageTakenArray = [];
+
+    var fbAuth = fb.getAuth();
+    if(fbAuth) {
+        //                      nav into specific user node
+        var userReference = fb.child("users/" + fbAuth.uid);
+        // binding a specific node in firebase to array obj in image array
+        var syncArray = $firebaseArray(userReference.child("images"));
+        $scope.images = syncArray;
+    } else {
+        $state.go("login"); // goto firebase.html if fbAuth = false
+    }
 
   // upoad the picture:-------------------------------------------------------
   $scope.upload = function() {
@@ -128,15 +130,49 @@ tentacleApp.controller('EventDetailCtrl', function($scope, $stateParams, Events,
       $cordovaCamera.getPicture(options).then(function(imageData) {
           // add pic to firebase:
           syncArray.$add({image: imageData}).then(function() {
+              //alert(imageData);
               alert("Image has been uploaded");
-              console.log(imageData);
           });
       }, function(error) {
           console.error(error);
       });
   }
 
+  //-------------------------MODAL Zoom----------------------------------
+    $scope.zoomMin = 1;
 
+    $scope.showImages = function(image, index) {
+        $scope.image = image;
+        $scope.activeSlide = index;
+        // console.log("$scope.activeSlide = ");
+        // console.log($scope.activeSlide);
+        $scope.showModal('templates/gallery-zoom.html');
+    };
+
+    $scope.showModal = function(templateUrl) {
+        $ionicModal.fromTemplateUrl(templateUrl, {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.modal = modal;
+            $scope.modal.show();
+        });
+    }
+
+    $scope.closeModal = function() {
+        $scope.modal.hide();
+        $scope.modal.remove()
+    };
+
+    $scope.updateSlideStatus = function(slide) {
+        var zoomFactor = $ionicScrollDelegate.$getByHandle('scrollHandle' + slide).getScrollPosition().zoom;
+
+        if (zoomFactor == $scope.zoomMin) {
+            $ionicSlideBoxDelegate.enableSlide(true);
+        } else {
+            $ionicSlideBoxDelegate.enableSlide(false);
+        }
+    };
+    //-------------------------MODAL Zoom---------------------------------------
 });
 
 tentacleApp.controller('AccountCtrl', function($scope) {
