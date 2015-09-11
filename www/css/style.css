@@ -68,3 +68,10 @@
 .container{
   border:4px solid grey;
 }
+
+.tab-create, .tab-account {
+    background-color: #886AEA;
+}
+.tab-events {
+    background-color: #886AEA;
+}
