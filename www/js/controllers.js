@@ -78,7 +78,7 @@ tentacleApp.controller('CameraCtrl', function($scope, Camera) {
 tentacleApp.controller('CreateCtrl', function($scope) {
 })
 
-tentacleApp.controller('EventsCtrl', function($scope, Events,$firebaseArray, $firebaseAuth  ) {
+tentacleApp.controller('EventsCtrl', function($scope, Events, $firebaseArray, $firebaseAuth) {
 
 var fbAuth = $firebaseAuth(fb);
 
@@ -95,12 +95,15 @@ var fbAuth = $firebaseAuth(fb);
   $scope.createEvent = function(title, description, date, time){
           var ref = new Firebase("https://vivid-inferno-9711.firebaseio.com/events");
 
+          $scope.eventsRef = $firebaseArray(ref);
+
+
           $scope.event.title = title;
           $scope.event.description = description;
           $scope.event.date = date;
           $scope.event.time = time;
 
-          $scope.eventsRef = $firebaseArray(ref);
+
 
           if(fbAuth) {
               $scope.eventsRef.$add($scope.event).then(function() {
@@ -122,18 +125,19 @@ var fbAuth = $firebaseAuth(fb);
           } else {
               $state.go("login"); // goto firebase.html if fbAuth = false
           }
-
-
-
-
-
   }
 
+  $scope.events = (function(){
+    var ref = new Firebase("https://vivid-inferno-9711.firebaseio.com/events");
+    var events = $firebaseArray(ref);
+    return events;
+  })();
 
-  $scope.events = Events.all();
-  $scope.remove = function(event) {
-    Events.remove(event);
-  };
+
+  // $scope.events = Events.all();
+  // $scope.remove = function(event) {
+  //   Events.remove(event);
+  // };
 });
 
 
