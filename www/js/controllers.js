@@ -135,6 +135,9 @@ var fbAuth = $firebaseAuth(fb);
     return events;
   })();
 
+  // $scope.eventshow = function(event){
+  //   $state.go("tab.event-detail")
+  // }
 
 });
 
@@ -142,9 +145,7 @@ var fbAuth = $firebaseAuth(fb);
 tentacleApp.controller('EventDetailCtrl', function($scope, $stateParams, Events, $ionicHistory, $firebaseArray, $cordovaCamera, $cordovaCapture) {
   $scope.event = Events.get($stateParams.eventId);
 
-
-
-  // $ionicHistory.clearHistory(); // cannot go backwards
+  console.log($scope.event);
 
   $scope.images = []; // empty array if NO images saved in firebase
 
