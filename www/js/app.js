@@ -62,12 +62,12 @@ tentacleApp.config(function($stateProvider, $urlRouterProvider) {
 
   // Each tab has its own nav history stack:
 
-  .state('tab.dash', {
-    url: '/dash',
+  .state('tab.create', {
+    url: '/create',
     views: {
-      'tab-dash': {
-        templateUrl: 'templates/tab-dash.html',
-        controller: 'DashCtrl'
+      'tab-create': {
+        templateUrl: 'templates/tab-create.html',
+        controller: 'EventsCtrl'
       }
     }
   })

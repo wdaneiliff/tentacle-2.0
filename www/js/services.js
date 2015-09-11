@@ -52,12 +52,7 @@ angular.module('starter.services', [])
     id: 0,
     name: 'Jimmys Birthday Party!',
     lastText: 'Come celebrate jimmys 21st birthday',
-    face: 'img/octoman.png'
-  }, {
-    id: 1,
-    name: 'Tonys Tea Party',
-    lastText: 'Lets get wierd',
-    face: 'img/octoman.png'
+    face:''
   }];
 
   return {
