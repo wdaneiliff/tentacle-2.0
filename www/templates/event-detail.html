@@ -39,16 +39,16 @@
       <!-- grid based flow for pics -->
         <div class="row event-pics" ng-repeat="image in images" ng-if="$index % 4 === 0">
             <div class="col col-25" ng-if="$index < images.length">
-                <img ng-src="data:image/jpg;base64,{{images[$index].image}}" on-touch="showImages(images[$index].image, $index)" width="100%" />
+                <img ng-src="data:image/jpg;base64,{{images[$index].image}}" on-double-tap="showImages(images[$index].image, $index)" width="100%" />
             </div>
             <div class="col col-25" ng-if="$index + 1 < images.length">
-                <img ng-src="data:image/jpg;base64,{{images[$index + 1].image}}" on-touch="showImages(images[$index+1].image, $index+1)" width="100%" />
+                <img ng-src="data:image/jpg;base64,{{images[$index + 1].image}}" on-double-tap="showImages(images[$index+1].image, $index+1)" width="100%" />
             </div>
             <div class="col col-25" ng-if="$index + 2 < images.length">
-                <img ng-src="data:image/jpg;base64,{{images[$index + 2].image}}" on-touch="showImages(images[$index+2].image)" width="100%" />
+                <img ng-src="data:image/jpg;base64,{{images[$index + 2].image}}" on-double-tap="showImages(images[$index+2].image)" width="100%" />
             </div>
             <div class="col col-25" ng-if="$index + 3 < images.length">
-                <img ng-src="data:image/jpg;base64,{{images[$index + 3].image}}" on-touch="showImages(images[$index+3].image)" width="100%" />
+                <img ng-src="data:image/jpg;base64,{{images[$index + 3].image}}" on-double-tap="showImages(images[$index+3].image)" width="100%" />
             </div>
         </div>
     </ion-content>
